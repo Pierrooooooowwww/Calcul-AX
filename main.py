@@ -11,11 +11,14 @@ from ratio_lx import calcul_ratio_Lx
 from lx_ly_ratio import calcul_ratio_Lx_Ly
 from utile import arrondi_arithmetique
 from calcul_actualisation import calcul_vecteur_actualisation
+from prorata_décès import calcul_vecteur_prorata_deces
+import time
 
 
 
 with open("data/input.json","r", encoding="utf-8") as file:
     payload = json.load(file)
+
 
 table_mortalité_TGM05 = pd.read_csv("Table.csv",sep=";") #Table de Mortalité TGM05
 
@@ -38,4 +41,8 @@ lX_vector_ratio = calcul_ratio_Lx(lX_vector_exact)
 lY_vector_ratio = calcul_ratio_Lx(lY_vector_exact)
 
 lX_lY_vector_ratio = calcul_ratio_Lx_Ly(lX_vector_exact, lY_vector_exact) # Calcul du (1-px)*py sur le Excel
+
+actualisation_vector = calcul_vecteur_actualisation(affichage_tout_les_mois[1],payload['taux_effectif'],age_rentier_exact)
+prorata_décès = calcul_vecteur_prorata_deces(lX_vector_exact, lY_vector_exact,taux_reversion=0.01)
+
 
