@@ -32,41 +32,8 @@ def generer_fins_de_mois(date_debut, age_limite= 120):
 
     return dates
 
-# def generer_dates_jusqua_limite(date_debut, age_rentier, age_conjoint, frequence):
-#     """
-#     Génère les dates de fin de période jusqu'à ce que les deux âges soient > 120 ans et retourne aussi les tableaux des ages exact de Rentier et Conjoint
-    
-#     :param date_debut: Date de départ
-#     :param age_rentier: Age initial du rentier
-#     :param age_conjoint: Age initial du conjoint
-#     :param frequence: Fréquence du versement (mensuel, trimestriel, etc.)
-#     :return: Liste des dates de fin de période
-#     """
-#     frequence = frequence.lower()
-#     delta_mois = {
-#         'mensuel': 1, #12
-#         'trimestriel': 3, #4
-#         'semestriel': 6, #2
-#         'annuel': 12 #1
-#     }.get(frequence)
 
-#     dates = []
-#     date_courante = date_debut
-
-#     while age_rentier < 121 or age_conjoint < 121:
-#         dates.append(fin_periode(date_courante, frequence))
-#         age_rentier += delta_mois / 12
-#         age_conjoint += delta_mois / 12
-
-        
-#         mois_suivant = date_courante.month + delta_mois
-#         annee_suivante = date_courante.year + (mois_suivant - 1) // 12
-#         mois_suivant = (mois_suivant - 1) % 12 + 1
-#         date_courante = datetime(annee_suivante, mois_suivant, 1)
-
-#     return dates 
-
-def generer_dates_jusqua_limite(date_debut: datetime, age_rentier: float, age_conjoint: float, frequence: str = "mensuel") -> tuple[list[datetime], list[float], list[float]]:
+def generer_dates_jusqua_limite(date_debut, age_rentier, age_conjoint, frequence):
     """
     Génère les dates de fin de période jusqu'à ce que les deux âges soient > 120 ans,
     en retournant aussi les listes d'âges correspondantes pour rentier et conjoint.
@@ -94,7 +61,7 @@ def generer_dates_jusqua_limite(date_debut: datetime, age_rentier: float, age_co
 
     date_courante = date_debut
 
-    while age_rentier < 120 or age_conjoint < 120:
+    while age_rentier < 121 or age_conjoint < 121:
         dates.append(fin_periode(date_courante, frequence))
         ages_rentier.append(round(age_rentier, 6))
         ages_conjoint.append(round(age_conjoint, 6))
